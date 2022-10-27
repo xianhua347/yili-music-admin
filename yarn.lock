@@ -3,9 +3,9 @@
 
 
 "@babel/parser@^7.16.4":
-  "integrity" "sha512-qpVT7gtuOLjWeDTKLkJ6sryqLliBaFpAtGeqw5cs5giLldvh+Ch0plqnUMKoVAUS6ZEueQQiZV+p5pxtPitEsA=="
-  "resolved" "https://registry.npmmirror.com/@babel/parser/-/parser-7.19.4.tgz"
-  "version" "7.19.4"
+  "integrity" "sha512-h1IUp81s2JYJ3mRkdxJgs4UvmSsRvDrx5ICSJbPvtWYv5i1nTBGcBpnog+89rAFMwvvru6E5NUHdBe01UeSzYA=="
+  "resolved" "https://registry.npmmirror.com/@babel/parser/-/parser-7.19.6.tgz"
+  "version" "7.19.6"
 
 "@quasar/extras@^1.15.5":
   "integrity" "sha512-JzKKx5/eKAip3X3bZUEJOOWT9NudqjF01gcce6rtyviko49OU4r+ekyJU3QQIKF8ZqnjZ+DpsVpMWBBZnO6hSQ=="
@@ -17,10 +17,15 @@
   "resolved" "https://registry.npmmirror.com/@quasar/vite-plugin/-/vite-plugin-1.2.3.tgz"
   "version" "1.2.3"
 
+"@types/node@^18.11.6":
+  "integrity" "sha512-j3CEDa2vd96K0AXF8Wur7UucACvnjkk8hYyQAHhUNciabZLDl9nfAEVUSwmh245OOZV15bRA3Y590Gi5jUcDJg=="
+  "resolved" "https://registry.npmmirror.com/@types/node/-/node-18.11.6.tgz"
+  "version" "18.11.6"
+
 "@vitejs/plugin-vue@^2.0.0 || ^3.0.0", "@vitejs/plugin-vue@^3.1.0":
-  "integrity" "sha512-3zxKNlvA3oNaKDYX0NBclgxTQ1xaFdL7PzwF6zj9tGFziKwmBa3Q/6XcJQxudlT81WxDjEhHmevvIC4Orc1LhQ=="
-  "resolved" "https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-3.1.2.tgz"
-  "version" "3.1.2"
+  "integrity" "sha512-E0tnaL4fr+qkdCNxJ+Xd0yM31UwMkQje76fsDVBBUCoGOUPexu2VDUYHL8P4CwV+zMvWw6nlRw19OnRKmYAJpw=="
+  "resolved" "https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-3.2.0.tgz"
+  "version" "3.2.0"
 
 "@vue/compiler-core@3.2.41":
   "integrity" "sha512-oA4mH6SA78DT+96/nsi4p9DX97PHcNROxs51lYk7gb9Z4BPKQ3Mh+BLn6CQZBw857Iuhu28BfMSRHAlPvD4vlw=="
@@ -63,6 +68,11 @@
   dependencies:
     "@vue/compiler-dom" "3.2.41"
     "@vue/shared" "3.2.41"
+
+"@vue/devtools-api@^6.4.5":
+  "integrity" "sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ=="
+  "resolved" "https://registry.npmmirror.com/@vue/devtools-api/-/devtools-api-6.4.5.tgz"
+  "version" "6.4.5"
 
 "@vue/reactivity-transform@3.2.41":
   "integrity" "sha512-mK5+BNMsL4hHi+IR3Ft/ho6Za+L3FA5j8WvreJ7XzHrqkPq8jtF/SMo7tuc9gHjLDwKZX1nP1JQOKo9IEAn54A=="
@@ -331,7 +341,7 @@
   "resolved" "https://registry.npmmirror.com/picomatch/-/picomatch-2.3.1.tgz"
   "version" "2.3.1"
 
-"postcss@^8.1.10", "postcss@^8.4.16":
+"postcss@^8.1.10", "postcss@^8.4.18":
   "integrity" "sha512-Wi8mWhncLJm11GATDaQKobXSNEYGUHeQLiQqDFG1qQ5UTDPTEvKw0Xt5NsTpktGTwLps3ByrWsBrG0rB8YQ9oA=="
   "resolved" "https://registry.npmmirror.com/postcss/-/postcss-8.4.18.tgz"
   "version" "8.4.18"
@@ -339,6 +349,11 @@
     "nanoid" "^3.3.4"
     "picocolors" "^1.0.0"
     "source-map-js" "^1.0.2"
+
+"prettier@^2.7.1":
+  "integrity" "sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g=="
+  "resolved" "https://registry.npmmirror.com/prettier/-/prettier-2.7.1.tgz"
+  "version" "2.7.1"
 
 "proxy-from-env@^1.1.0":
   "integrity" "sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg=="
@@ -366,10 +381,10 @@
     "path-parse" "^1.0.7"
     "supports-preserve-symlinks-flag" "^1.0.0"
 
-"rollup@~2.78.0":
-  "integrity" "sha512-VeeCgtGi4P+o9hIg+xz4qQpRl6R401LWEXBmxYKOV4zlF82lyhgh2hTZnheFUbANE8l2A41F458iwj2vEYaXJg=="
-  "resolved" "https://registry.npmmirror.com/rollup/-/rollup-2.78.1.tgz"
-  "version" "2.78.1"
+"rollup@^2.79.1":
+  "integrity" "sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw=="
+  "resolved" "https://registry.npmmirror.com/rollup/-/rollup-2.79.1.tgz"
+  "version" "2.79.1"
   optionalDependencies:
     "fsevents" "~2.3.2"
 
@@ -408,18 +423,25 @@
     "is-number" "^7.0.0"
 
 "vite@^2.0.0 || ^3.0.0", "vite@^3.0.0", "vite@^3.1.0":
-  "integrity" "sha512-m7jJe3nufUbuOfotkntGFupinL/fmuTNuQmiVE7cH2IZMuf4UbfbGYMUT3jVWgGYuRVLY9j8NnrRqgw5rr5QTg=="
-  "resolved" "https://registry.npmmirror.com/vite/-/vite-3.1.8.tgz"
-  "version" "3.1.8"
+  "integrity" "sha512-Ovj7+cqIdM1I0LPCk2CWxzgADXMix3NLXpUT6g7P7zg/a9grk/TaC3qn9YMg7w7M0POIVCBOp1aBANJW+RH7oA=="
+  "resolved" "https://registry.npmmirror.com/vite/-/vite-3.2.0.tgz"
+  "version" "3.2.0"
   dependencies:
     "esbuild" "^0.15.9"
-    "postcss" "^8.4.16"
+    "postcss" "^8.4.18"
     "resolve" "^1.22.1"
-    "rollup" "~2.78.0"
+    "rollup" "^2.79.1"
   optionalDependencies:
     "fsevents" "~2.3.2"
 
-"vue@^3.0.0", "vue@^3.2.25", "vue@^3.2.37", "vue@3.2.41":
+"vue-router@^4.0.13":
+  "integrity" "sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ=="
+  "resolved" "https://registry.npmmirror.com/vue-router/-/vue-router-4.1.6.tgz"
+  "version" "4.1.6"
+  dependencies:
+    "@vue/devtools-api" "^6.4.5"
+
+"vue@^3.0.0", "vue@^3.2.0", "vue@^3.2.25", "vue@^3.2.37", "vue@3.2.41":
   "integrity" "sha512-uuuvnrDXEeZ9VUPljgHkqB5IaVO8SxhPpqF2eWOukVrBnRBx2THPSGQBnVRt0GrIG1gvCmFXMGbd7FqcT1ixNQ=="
   "resolved" "https://registry.npmmirror.com/vue/-/vue-3.2.41.tgz"
   "version" "3.2.41"
