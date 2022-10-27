@@ -21,7 +21,7 @@
           :rules="[(val) => (val && val.length > 0) || '请输入密码']"
         />
 
-        <q-toggle v-model="accept" label="记住我" />
+        <q-toggle v-model="accept" ref='test' label="记住我" />
 
         <div>
           <q-btn
@@ -38,8 +38,7 @@
 
 <script setup>
 import { ref } from 'vue';
-
-const accept = ref(false);
+const accept = ref(true);
 const username = ref(null);
 const password = ref(null);
 </script>
