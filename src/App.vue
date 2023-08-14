@@ -1,9 +1,5 @@
-<script setup>
-import { useQuasar } from 'quasar'
-useQuasar().dark.set('auto')
-</script>
-
+<script setup></script>
 <template>
-  <RouterView></RouterView>
+  <router-view></router-view>
 </template>
 <style scoped></style>

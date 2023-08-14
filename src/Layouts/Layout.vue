@@ -4,6 +4,7 @@
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
         <q-toolbar-title> 原力音乐 </q-toolbar-title>
+        <dark-mode-toggle />
       </q-toolbar>
     </q-header>
 
@@ -16,17 +17,14 @@
   </q-layout>
 </template>
 
-<script>
-export default {
-  name: 'Layout'
-};
-</script>
-
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 
-const leftDrawerOpen = ref(false);
-const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value);
+import DarkModeToggle from '@/components/DarkModeToggle.vue';
 
+const leftDrawerOpen = ref(false);
+const toggleLeftDrawer = (): void => {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
+};
 </script>
 <style scoped></style>

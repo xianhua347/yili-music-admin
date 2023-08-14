@@ -1,34 +1,34 @@
 <template>
-  <q-layout view="hHr LpR lFf" class="column flex-center">
+  <q-layout class="column flex-center" view="hHr LpR lFf">
     <q-card class="my-card">
       <div class="title text-center text-h6">猿立音乐后台</div>
-      <q-form class="q-gutter-md q-pa-md">
+      <q-form class="q-gutter-md q-pa-md" @submit="onSubmit(loginForm)">
         <q-input
+          v-model="loginForm.username"
+          :rules="[(val) => (val && val.length > 0) || '请输入用户名']"
           filled
-          type="text"
-          v-model="username"
           label="用户名："
           lazy-rules
-          :rules="[(val) => (val && val.length > 0) || '请输入用户名']"
+          type="text"
         />
 
         <q-input
+          v-model="loginForm.password"
+          :rules="[(val) => (val && val.length > 0) || '请输入密码']"
           filled
-          v-model="password"
-          type="password"
           label="密码："
           lazy-rules
-          :rules="[(val) => (val && val.length > 0) || '请输入密码']"
+          type="password"
         />
 
-        <q-toggle v-model="accept" ref='test' label="记住我" />
+        <!--        <q-toggle ref="test" v-model="appState.rememberMe" label="记住我" />-->
 
         <div>
           <q-btn
             class="full-width"
+            color="primary"
             label="登录"
             type="submit"
-            color="primary"
           />
         </div>
       </q-form>
@@ -36,21 +36,32 @@
   </q-layout>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-const accept = ref(true);
-const username = ref(null);
-const password = ref(null);
-</script>
+import { useRouter } from 'vue-router';
 
-<script>
-export default {
-  name: 'Login'
+import type { LoginRequest } from '@/models/ApiModel';
+import { useAppStore } from '@/store';
+
+const loginForm = ref<LoginRequest>({
+  username: '',
+  password: ''
+});
+
+const appStore = useAppStore();
+const { appState } = storeToRefs(appStore);
+const router = useRouter();
+console.log(appState.value.token);
+const onSubmit = async (loginFrom: LoginRequest) => {
+  await appStore.loginRequest(loginFrom);
+  await router.push('/index');
 };
 </script>
-<style lang="sass">
+<style lang="sass" scoped>
 .my-card
-    min-width: 25rem
+  min-width: 25rem
+
 .title
-    padding-top: 1rem
+  padding-top: 1rem
 </style>

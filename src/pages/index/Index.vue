@@ -1,13 +1,4 @@
-<template>
-  <div>这是主页</div>
-</template>
+<template>hello world</template>
 
-<script setup></script>
-
-<script>
-export default {
-  name: 'Index'
-};
-</script>
-
+<script setup lang="ts"></script>
 <style scoped></style>
