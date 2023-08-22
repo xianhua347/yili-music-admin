@@ -12,7 +12,7 @@ export const useAppStore = defineStore(
   () => {
     const appState = ref<AppState>({
       token: '',
-      darkMode: false
+      darkMode: null
     });
 
     async function loginRequest(loginForm: LoginRequest) {

@@ -1,4 +1,4 @@
 export interface AppState {
   token?: string | null;
-  darkMode: boolean;
+  darkMode: boolean | null;
 }
