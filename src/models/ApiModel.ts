@@ -40,7 +40,7 @@ export interface ApiResponse<T> {
   code?: number;
 
   /**
-   * 错误消息
+   * 响应消息
    */
   message?: string;
 
