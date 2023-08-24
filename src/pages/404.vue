@@ -9,7 +9,7 @@
   </q-layout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router';
 
 const route = useRouter();
@@ -20,5 +20,3 @@ function backPage() {
   route.back();
 }
 </script>
-
-<style scoped></style>

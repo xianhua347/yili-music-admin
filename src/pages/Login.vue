@@ -11,7 +11,6 @@
           lazy-rules
           type="text"
         />
-
         <q-input
           v-model="loginForm.password"
           :rules="[(val) => (val && val.length > 0) || '请输入密码']"
@@ -20,9 +19,6 @@
           lazy-rules
           type="password"
         />
-
-        <!--        <q-toggle ref="test" v-model="appState.rememberMe" label="记住我" />-->
-
         <div>
           <q-btn
             class="full-width"
