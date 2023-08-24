@@ -2,7 +2,7 @@ import type { AxiosResponse } from 'axios';
 
 import { request } from '@/api/index';
 import type { ApiResponse, LoginRequest } from '@/models/ApiModel.ts';
-import type { UserCreateDTO } from '@/models/UserModel.ts';
+import type { UserCreateRequest } from '@/models/UserModel.ts';
 
 const USER_URL: string = '/users/';
 
@@ -34,12 +34,12 @@ export async function getCurrentUser(): Promise<ApiResponse<any>> {
 }
 
 export async function register(
-  userCreateDTO: UserCreateDTO
+  createRequest: UserCreateRequest
 ): Promise<ApiResponse<any>> {
   try {
     const response: AxiosResponse<ApiResponse<any>> = await request.post(
       `${USER_URL}register`,
-      userCreateDTO
+      createRequest
     );
     return response.data;
   } catch (error: any) {
