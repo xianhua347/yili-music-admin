@@ -7,7 +7,7 @@ import {
   RouteRecordRaw
 } from 'vue-router';
 
-import { useAppStore } from '@/store';
+import { useTokenStore } from '@/store';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/pages/Login.vue')
   },
   {
+    path: '/gitee',
+    name: 'Gitee',
+    component: () => import('@/pages/GiteeLogin.vue')
+  },
+  {
     path: '/:pathMatch(.*)',
     component: () => import('@/pages/404.vue')
   }
@@ -43,9 +48,9 @@ const router: Router = createRouter({
 const whiteList = ['/login'];
 router.beforeEach(
   (to: RouteLocationNormalized, _, next: NavigationGuardNext) => {
-    const { appState } = useAppStore();
+    const { tokenState } = useTokenStore();
     // 如果没有token
-    if (!appState.token) {
+    if (!tokenState.accessToken) {
       // 判断当前页面是否在白名单中
       // 如果在就放行
       if (whiteList.indexOf(to.path) !== -1) {
@@ -55,7 +60,7 @@ router.beforeEach(
       return next(`/login?redirect=${to.path}`);
     }
     // 如果已经是登录状态
-    if (appState.token && to.path === '/login') {
+    if (tokenState.accessToken && to.path === '/login') {
       return next({ name: 'Index' });
     }
     // 其他情况放行

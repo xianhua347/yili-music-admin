@@ -3,7 +3,7 @@
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title> 原力音乐 </q-toolbar-title>
+        <q-toolbar-title> 原力音乐</q-toolbar-title>
         <dark-mode-toggle />
       </q-toolbar>
     </q-header>

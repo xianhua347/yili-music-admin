@@ -1,19 +1,4 @@
 /**
- * 登录请求。
- */
-export interface LoginRequest {
-  /**
-   * 用户名。
-   */
-  username: string;
-
-  /**
-   * 密码。
-   */
-  password: string;
-}
-
-/**
  * 错误响应。
  */
 export interface ErrorResponse {
@@ -37,15 +22,21 @@ export interface ApiResponse<T> {
   /**
    * 响应代码
    */
-  code?: number;
+  code: number;
 
   /**
    * 响应消息
    */
-  message?: string;
+  message: string;
 
   /**
    * 响应数据
    */
-  data?: T;
+  data: T;
+}
+
+export interface BaseResponse {
+  id: string;
+  createdTime: string;
+  updatedTime: string;
 }

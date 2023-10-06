@@ -33,24 +33,21 @@
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-import type { LoginRequest } from '@/models/ApiModel';
-import { useAppStore } from '@/store';
+import type { LoginRequest } from '@/models';
+import { useTokenStore } from '@/store';
 
 const loginForm = ref<LoginRequest>({
   username: '',
   password: ''
 });
 
-const appStore = useAppStore();
-const { appState } = storeToRefs(appStore);
+const tokenStore = useTokenStore();
 const router = useRouter();
-console.log(appState.value.token);
 const onSubmit = async (loginFrom: LoginRequest) => {
-  await appStore.loginRequest(loginFrom);
+  await tokenStore.loginRequest(loginFrom);
   await router.push('/index');
 };
 </script>

@@ -13,9 +13,11 @@
 import { useRouter } from 'vue-router';
 
 const route = useRouter();
+
 function toIndex() {
   route.push('/');
 }
+
 function backPage() {
   route.back();
 }

@@ -13,6 +13,12 @@ export default defineConfig({
   esbuild: {
     target: 'ES2020'
   },
+  /*  server: {
+    host: 'www.vite.com',
+    port: 2002,
+    open: true
+  }, */
+  // publicDir: 'public',
   plugins: [
     vue({
       template: { transformAssetUrls }

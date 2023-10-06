@@ -1,2 +1,4 @@
+export * from '@/api/auth';
+export * from '@/api/oatuh';
 export * as request from '@/api/request';
-export * as user from '@/api/user';
+export * from '@/api/user';

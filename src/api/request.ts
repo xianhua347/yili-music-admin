@@ -1,13 +1,24 @@
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios, { AxiosError } from 'axios';
 import { Notify } from 'quasar';
+import { useRouter } from 'vue-router';
 
-import type { ErrorResponse } from '@/models/ApiModel.ts';
-import { useAppStore } from '@/store';
+import { refreshToken } from '@/api';
+import type {
+  ApiResponse,
+  ErrorResponse,
+  RefreshTokenResponse,
+  TokenState
+} from '@/models';
+import { TOKEN_PREFIX } from '@/models';
+import { useTokenStore } from '@/store';
 
 const BASE_URL: string = import.meta.env.VITE_API_BASE_URL;
 
-const tokenPrefix = 'Bearer ';
+// 用于跟踪令牌刷新状态的布尔变量
+let isRefreshing = true;
+// 用于存储需要在令牌刷新后重新执行的请求回调的数组
+const refreshQueue: Array<Function> = [];
 
 export const instance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -15,15 +26,53 @@ export const instance: AxiosInstance = axios.create({
 });
 
 instance.interceptors.request.use((request) => {
-  const { appState } = useAppStore();
-  if (appState.token && request.headers) {
-    request.headers.Authorization = tokenPrefix + appState.token;
+  const { tokenState } = useTokenStore();
+  if (
+    tokenState.accessToken &&
+    !(request.url === '/auth/refreshToken') &&
+    request.headers
+  ) {
+    request.headers.Authorization = TOKEN_PREFIX + tokenState.accessToken;
   }
   return request;
 });
-
 instance.interceptors.response.use(
-  (response: AxiosResponse) => {
+  async (response: AxiosResponse) => {
+    const { code } = response.data;
+    // 处理accessToken过期
+    if (code === 4000107) {
+      if (isRefreshing) {
+        try {
+          const { tokenState } = useTokenStore();
+          isRefreshing = false;
+          const refreshedData = await refreshToken(tokenState.refreshToken);
+          // 更新appState数据
+          updateAppStateTokens(tokenState, refreshedData);
+          // 使用更新后的令牌重试原始请求
+          const { config } = response;
+          return instance(config);
+        } catch (ex: any) {
+          await handleRefreshTokenError(ex);
+        } finally {
+          isRefreshing = true;
+          // 在令牌刷新后，遍历队列并执行回调函数
+          refreshQueue.forEach((callback: Function) => {
+            // 执行回调函数
+            callback();
+          });
+          // 清空队列
+          refreshQueue.length = 0;
+        }
+      } else {
+        // 如果令牌刷新已经在进行中，则将此请求排队
+        return new Promise((resolve) => {
+          refreshQueue.push(() => {
+            resolve(instance(response.config));
+          });
+        });
+      }
+    }
+    // 返回原始响应数据
     return response.data;
   },
   async (error: AxiosError<ErrorResponse>) => {
@@ -32,9 +81,9 @@ instance.interceptors.response.use(
 
     handleResponseData(responseData);
 
-    if (error.response?.status === 401 || error.response?.status === 403) {
-      const appStore = useAppStore();
-      appStore.logout();
+    if (error.response?.status === 401) {
+      const tokenStore = useTokenStore();
+      await tokenStore.logout();
     }
     return Promise.reject(error);
   }
@@ -55,6 +104,22 @@ const handleResponseData = (
   );
 };
 
+// 用于更新 appState 中的令牌数据
+function updateAppStateTokens(
+  state: TokenState,
+  refreshedData: ApiResponse<RefreshTokenResponse>
+) {
+  state.refreshToken = refreshedData.data.refreshToken;
+  state.accessToken = refreshedData.data.accessToken;
+}
+
+// 函数用于处理刷新令牌失败的情况
+async function handleRefreshTokenError(ex: any) {
+  const router = useRouter();
+  console.error('刷新令牌错误 =>', ex);
+  await router.push('/login');
+}
+
 export const get = <T>(
   url: string,
   config?: AxiosRequestConfig
@@ -66,7 +131,8 @@ export const post = <T>(
   url: string,
   data?: any,
   config?: AxiosRequestConfig
-): Promise<AxiosResponse<T, any>> => {
+): Promise<T> => {
+  // @ts-ignore
   return instance.post<T>(url, data, config);
 };
 

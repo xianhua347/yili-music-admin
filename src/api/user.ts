@@ -1,33 +1,15 @@
-import type { AxiosResponse } from 'axios';
+import { request } from '@/api';
+import {
+  ApiResponse,
+  RefreshTokenResponse,
+  User,
+  USER_URL,
+  UserCreateRequest
+} from '@/models';
 
-import { request } from '@/api/index';
-import type { ApiResponse, LoginRequest } from '@/models/ApiModel.ts';
-import type { UserCreateRequest } from '@/models/UserModel.ts';
-
-const USER_URL: string = '/users/';
-
-/**
- * 登录
- * @username string
- * @password string
- */
-
-export async function login(
-  loginRequest: LoginRequest
-): Promise<ApiResponse<string>> {
+export async function getCurrentUser(): Promise<ApiResponse<User>> {
   try {
-    return await request.post(`${USER_URL}login`, loginRequest);
-  } catch (error: any) {
-    return Promise.reject(new Error(`login error${error}`));
-  }
-}
-
-export async function getCurrentUser(): Promise<ApiResponse<any>> {
-  try {
-    const response: AxiosResponse<ApiResponse<any>> = await request.get(
-      `${USER_URL}me`
-    );
-    return response.data;
+    return await request.get(`${USER_URL}me`);
   } catch (error: any) {
     return Promise.reject(new Error(`获取当前用户失败${error}`));
   }
@@ -35,24 +17,17 @@ export async function getCurrentUser(): Promise<ApiResponse<any>> {
 
 export async function register(
   createRequest: UserCreateRequest
-): Promise<ApiResponse<any>> {
+): Promise<ApiResponse<User>> {
   try {
-    const response: AxiosResponse<ApiResponse<any>> = await request.post(
-      `${USER_URL}register`,
-      createRequest
-    );
-    return response.data;
+    return await request.post(`${USER_URL}register`, createRequest);
   } catch (error: any) {
     return Promise.reject(new Error(`注册失败${error}`));
   }
 }
 
-export async function getUserByName(name: string): Promise<ApiResponse<any>> {
+export async function getUserByName(name: string): Promise<ApiResponse<User>> {
   try {
-    const response: AxiosResponse<ApiResponse<any>> = await request.get(
-      `${USER_URL}${name}`
-    );
-    return response.data;
+    return await request.get(`${USER_URL}${name}`);
   } catch (error: any) {
     return Promise.reject(new Error(`获取用户失败${error}`));
   }
@@ -60,11 +35,25 @@ export async function getUserByName(name: string): Promise<ApiResponse<any>> {
 
 export async function deleteUser(id: string): Promise<ApiResponse<void>> {
   try {
-    const response: AxiosResponse<ApiResponse<any>> = await request.del(
-      `${USER_URL}${id}`
-    );
-    return response.data;
+    return await request.del(`${USER_URL}${id}`);
   } catch (error: any) {
     return Promise.reject(new Error(`删除用户失败${error}`));
+  }
+}
+
+// todo 定义请求类型
+export async function getAllUsers() {
+  try {
+    return await request.post<ApiResponse<RefreshTokenResponse>>(
+      `${USER_URL}search`,
+      {
+        query: null,
+        page: 1,
+        size: 10,
+        sorts: null
+      }
+    );
+  } catch (error: any) {
+    return Promise.reject(new Error(`获取刷新token失败${error}`));
   }
 }

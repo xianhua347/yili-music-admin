@@ -1,47 +1,31 @@
 <template>
   <q-toggle
-    v-model="darkMode"
+    v-model="buttonValue"
     :checked-icon="mdiWeatherNight"
     :unchecked-icon="mdiWhiteBalanceSunny"
     color="secondary"
     size="md"
+    @click="Dark.toggle()"
   />
 </template>
 <script lang="ts" setup>
 import { mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
 import { storeToRefs } from 'pinia';
-import { useQuasar } from 'quasar';
-import { onUnmounted, Ref, ref, watch } from 'vue';
+import { Dark } from 'quasar';
+import { ref, watch } from 'vue';
 
-import { useAppStore } from '@/store';
+import { useAppSettingsStore } from '@/store';
 
-const $q = useQuasar();
-const appStore = useAppStore();
-const { appState } = storeToRefs(appStore);
-
-const darkMode: Ref<boolean> = ref(appState.value.darkMode ?? false);
-const mediaQuery: MediaQueryList = window.matchMedia(
-  '(prefers-color-scheme: dark)'
-);
-
-const handleMediaQueryChange = (e: MediaQueryListEvent): void => {
-  const preferredDark: boolean = e.matches;
-  $q.dark.set(preferredDark);
-  darkMode.value = preferredDark;
-};
-mediaQuery.addEventListener('change', handleMediaQueryChange);
+const appStore = useAppSettingsStore();
+const { appSettingsState } = storeToRefs(appStore);
+const buttonValue = ref(Dark.isActive);
 
 watch(
-  darkMode,
+  () => Dark.isActive,
   (newValue) => {
-    $q.dark.set(newValue);
-    appState.value.darkMode = newValue;
-  },
-  { immediate: true }
+    buttonValue.value = newValue;
+    appSettingsState.value.darkMode = newValue;
+  }
 );
-
-onUnmounted(() => {
-  mediaQuery.removeEventListener('change', handleMediaQueryChange);
-});
 </script>
 <style scoped></style>
