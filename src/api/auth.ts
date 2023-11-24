@@ -22,12 +22,16 @@ export async function login(
   }
 }
 
-export async function refreshToken(refreshToken?: string | null) {
+export async function refreshToken(
+  refreshToken?: string | null
+): Promise<ApiResponse<RefreshTokenResponse>> {
   try {
-    return await request.post<ApiResponse<RefreshTokenResponse>>(
+    return await request.get<ApiResponse<RefreshTokenResponse>>(
       `${AUTH_URL}refreshToken`,
       {
-        refreshToken
+        params: {
+          refreshToken
+        }
       }
     );
   } catch (error: any) {
