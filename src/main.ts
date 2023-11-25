@@ -15,11 +15,11 @@ const app = createApp(App);
 app
   .use(router)
   .use(pinia)
-  .use(AppColorMode)
   .use(Quasar, {
     plugins: {
       Notify,
       Dark
     }
   })
+  .use(AppColorMode)
   .mount('#app');
