@@ -1,7 +1,7 @@
 <template>
   <q-layout class="column flex-center" view="hHr LpR lFf">
     <q-card class="my-card">
-      <div class="title text-center text-h6">猿立音乐后台</div>
+      <div class="title text-center text-h6">原力音乐后台</div>
       <q-form class="q-gutter-md q-pa-md" @submit="onSubmit(loginForm)">
         <q-input
           v-model="loginForm.username"
