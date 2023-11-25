@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { Notify } from 'quasar';
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 
 import { login } from '@/api';
 import type { LoginRequest, TokenState } from '@/models';
+import router from '@/router';
 import { useUserStore } from '@/store';
 
 export const useTokenStore = defineStore(
@@ -14,7 +14,6 @@ export const useTokenStore = defineStore(
       accessToken: '',
       refreshToken: ''
     });
-
     async function loginRequest(loginForm: LoginRequest) {
       const { code, message, data } = await login(loginForm);
 
@@ -32,7 +31,6 @@ export const useTokenStore = defineStore(
 
     async function logout() {
       const userStore = useUserStore();
-      const router = useRouter();
       tokenState.value.accessToken = '';
       userStore.reset();
       await router.push('/login');
