@@ -1,51 +1,18 @@
 /**
- * 登录请求。
+ * Generic Query Request interface
  */
-export interface LoginRequest {
-  /**
-   * 用户名。
-   */
-  username: string;
-
-  /**
-   * 密码。
-   */
-  password: string;
+export interface QueryRequest<T> {
+  pageNum: number;
+  pageSize: number;
+  queryParams?: T;
 }
 
 /**
- * 错误响应。
+ * Generic Query Response interface
  */
-export interface ErrorResponse {
-  /**
-   * 错误代码。
-   */
-  code: number;
-
-  /**
-   * 错误消息。
-   */
-  message: string;
-}
-
-/**
- * 通用的API响应。
- *
- * @template T - 响应数据的类型。
- */
-export interface ApiResponse<T> {
-  /**
-   * 响应代码
-   */
-  code?: number;
-
-  /**
-   * 错误消息
-   */
-  message?: string;
-
-  /**
-   * 响应数据
-   */
-  data?: T;
+export interface QueryResponse<T> {
+  list: T[];
+  total: number;
+  pageNum: number;
+  pageSize: number;
 }
